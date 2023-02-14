@@ -10,5 +10,5 @@ btn.addEventListener('mouseover', function() {
 
 btn.addEventListener('click', function() {
 	btn.innerText = 'YOU GOT ME!';
-	document.body.style.backgroundColor = 'green';
+	document.body.style.backgroundColor = 'blue';
 });
