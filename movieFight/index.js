@@ -38,6 +38,7 @@ const autocompleteConfig = {
         return response.data.Search;
     }
 }
+
 // Call createAutoComplete with the required arguments for left side.
 createAutoComplete({
     ...autocompleteConfig,
@@ -74,6 +75,7 @@ createAutoComplete({
 let leftMovie;
 let rightMovie;
 
+// Helper Function for fetching specific movie data and storing it to variables
 const onMovieSelect = async ({imdbID}, summaryTarget, side) => {
     const response = await axios.get('http://www.omdbapi.com/', {
         params: {
@@ -95,18 +97,27 @@ const onMovieSelect = async ({imdbID}, summaryTarget, side) => {
       }
 }
 
+/** runComparison()
+ * Runs every time two movies are present in the comparison.
+ * Changes css of the elements after the comparison to display the results.
+ */
 const runComparison = () => {
+
+    // Fetching the DOM Elements of both sides to compare their properties and change their css.
     const leftSideStats = document.querySelectorAll('#left-summary .notification')
     const rightSideStats = document.querySelectorAll('#right-summary .notification')
 
+    // Looping over all the obtained elements.
     leftSideStats.forEach((leftStat, index) => {
+
+        // Right Side Equivalent.
         const rightStat = rightSideStats[index];
 
+        // Parse the obtained elements to fetch their values. Also replacing NaN and null values with 0.
         const leftSideValue = parseFloat(leftStat.dataset.value) || 0;
-        console.log('Left Side : ', leftSideValue)
         const rightSideValue = parseFloat(rightStat.dataset.value) || 0;
-        console.log('Right Side : ', rightSideValue)
 
+        // Comparing values.
         if(rightSideValue == leftSideValue) {
             leftStat.classList.add('is-primary')
             rightStat.classList.add('is-primary')
@@ -121,7 +132,7 @@ const runComparison = () => {
     })
 }
 
-
+// Helper Function for onMovieSelect to display the fetched information in a specific HTML format.
 const movieTemplate = (movieDetail) => {
     
     const dollars = parseInt(movieDetail.BoxOffice.replace(/\$/g, '').replace(/,/g, ''))
@@ -139,7 +150,6 @@ const movieTemplate = (movieDetail) => {
         }
       }, 0);
 
-    console.log(awards)
     return `
     <article class="media">
       <figure class="media-left">
