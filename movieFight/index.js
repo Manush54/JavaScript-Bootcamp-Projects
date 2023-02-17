@@ -25,7 +25,7 @@ const autocompleteConfig = {
      * Returns a promise due to async keyword.
     */
     async fetchData (searchTerm) {
-        const response = await axios.get('http://www.omdbapi.com/', {
+        const response = await axios.get('https://www.omdbapi.com/', {
             params: {
                 apikey : 'b964075e',
                 s: searchTerm
@@ -77,7 +77,7 @@ let rightMovie;
 
 // Helper Function for fetching specific movie data and storing it to variables
 const onMovieSelect = async ({imdbID}, summaryTarget, side) => {
-    const response = await axios.get('http://www.omdbapi.com/', {
+    const response = await axios.get('https://www.omdbapi.com/', {
         params: {
             apikey : 'b964075e',
             i: imdbID
